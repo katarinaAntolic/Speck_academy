@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Speck Academy 2023</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Katarina Antolić">
+        <meta name="date" content="23.02.2023.">
+        <link rel="stylesheet" type="text/css" href="stil.css">
+    </head>
+    <body>
+        <h1>My technologies</h1>
+        <div id="unos" style="position:relative; left:200px; top:30px;">
+                    <input type="text" name="add" id="innerTextOutput" placeholder="Enter new technology...">
+                    <button class="addButton" id="AddButton" onclick="addTechnology()">Add</button>
+                    <button class="removeAll" id="removeAll" onclick="removeAll()">Remove all items</button>
+            
+        </div>
+        <div id="technologies" style="position:relative; left:200px;">        
+           
+        
+        <script>
+            var input = document.getElementById("innerTextOutput");
+            input.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    document.getElementById("AddButton").click();
+            }
+            });
+
+            var left = true;
+            var positionY = 100;
+            function addTechnology() {
+                var innerTextOutput = document.getElementById("innerTextOutput");         
+                var text = innerTextOutput.value;
+                innerTextOutput.value = "";
+                if (text === "") {
+                    return;
+                }
+                const newElement = document.createElement("div");
+                newElement.style.position = "absolute";
+                if (left === true) {
+                    newElement.style.left = "0";
+
+                } else {
+                    newElement.style.left = "350px";
+                }
+                newElement.style.top = positionY.toString() + "px";
+                if (left === false) {
+                    positionY = positionY + 50;
+                }
+                left = !left;
+                
+                newElement.className = "technologyButton";
+                const label = document.createTextNode(text);
+                newElement.appendChild(label);
+                document.getElementById("technologies").appendChild(newElement);
+            }
+            
+            function removeAll() {
+                document.getElementById("technologies").innerHTML = ""; 
+                left = true;
+                positionY = 100;  
+            }
+        </script>
+        
+        </div>
+    </body>
+</html>
